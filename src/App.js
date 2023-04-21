@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import {getStarships} from "./services/Swapi"
+import "./App.css"
 
-function App() {
+export default function App() {
+  const [starship, setStarship] = useState([])
+
+  const testFunc = async () => {
+    const data = await getStarships()
+    const rows = data.map((row) => (
+        <div className="card" key = {row.name}>{row.name}</div>
+    ));
+    setStarship(rows)
+    //return rows
+
+  }
+
+
+  useEffect(() => {
+    testFunc()
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div className="App">
+    <div className="container">{starship ? <h1>{starship}</h1> : <h1>No content</h1> }</div>
+  </div>
+  )
 }
-
-export default App;
