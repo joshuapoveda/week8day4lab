@@ -8,7 +8,7 @@ export default function App() {
   const testFunc = async () => {
     const data = await getStarships()
     const rows = data.map((row) => (
-        <div className="card" key = {row.name}>{row.name}</div>
+        <p className="card" key = {row.name}>{row.name}</p>
     ));
     setStarship(rows)
     //return rows
@@ -21,8 +21,9 @@ export default function App() {
   }, []);
 
   return (
-  <div className="App">
-    <div className="container">{starship ? <h1>{starship}</h1> : <h1>No content</h1> }</div>
-  </div>
+  <>
+  <h2 className="banner">Star Wars Starships</h2>
+    {starship ? <div className="container">{starship}</div> : <h1>No content</h1> }
+  </>
   )
 }
